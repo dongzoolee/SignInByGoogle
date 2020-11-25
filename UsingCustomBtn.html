@@ -12,12 +12,12 @@
       gapi.load('auth2', function(){
         // Retrieve the singleton for the GoogleAuth library and set up the client.
         auth2 = gapi.auth2.init({
-          client_id: '349803348999-jklg6hgcrrd530tjaskj3f86b0foetsh.apps.googleusercontent.com',
+          client_id: 'YOUR CLINET-ID',
           cookiepolicy: 'single_host_origin',
           // Request scopes in addition to 'profile' and 'email'
           //scope: 'additional_scope'
         });
-        attachSignin(document.getElementById('signInWithG'));
+        attachSignin(document.getElementById('signInWithG')); // YOUR SIGN-IN Btn ID
       });
     };
   
@@ -25,7 +25,7 @@
       console.log(element.id);
       auth2.attachClickHandler(element, {},
           function(googleUser) {
-            onSignIn(googleUser)
+            onSignIn(googleUser) // Sending Login Data to Backend Server, Defined below
           }, function(error) {
             alert(JSON.stringify(error, undefined, 2));
           });
@@ -36,16 +36,19 @@
             width: 100px;
             height: 20px;
             background-color: black;
+            color:white;
         }
         #signInWithG{
             width:100px;
             height:20px;
+            background-color: black;
+            color:white;
         }
     </style>
 </head>
 
 <body>
-    <div id="signInWithG" class="customGPlusSignIn" data-onsuccess="onSignIn"></div>
+    <div id="signInWithG" class="customGPlusSignIn" data-onsuccess="onSignIn">로그인</div>
     <div id="signout" onclick="signOut()">로그아웃</div>
     <script>
         startApp();
@@ -54,7 +57,7 @@
             var id_token = googleUser.getAuthResponse().id_token;
 
             var xhr = new XMLHttpRequest();
-            xhr.open('POST', 'http://leed.at:3337/loginInfo');
+            xhr.open('POST', 'YOUR SERVER URL to SEND POST(USER INFO)');
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
             xhr.onload = function () {
                 console.log('Signed in as: ' + xhr.responseText);
