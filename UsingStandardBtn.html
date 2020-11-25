@@ -7,22 +7,19 @@
     <title>TcoLogin</title>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <meta name="google-signin-client_id"
-        content="349803348999-jklg6hgcrrd530tjaskj3f86b0foetsh.apps.googleusercontent.com">
+        content="YOUR CLIEND-ID">
     <style>
         #signout {
             width: 100px;
             height: 20px;
             background-color: black;
-        }
-        #signInWithG{
-            width:100px;
-            height:20px;
+            color: white;
         }
     </style>
 </head>
 
 <body>
-    <div id="signInWithG" class="customGPlusSignIn" data-onsuccess="onSignIn"></div>
+    <div class="g-signin2" data-onsuccess="onSignIn"></div>
     <div id="signout" onclick="signOut()">로그아웃</div>
     <script>
         function onSignIn(googleUser) {
@@ -30,7 +27,7 @@
             var id_token = googleUser.getAuthResponse().id_token;
 
             var xhr = new XMLHttpRequest();
-            xhr.open('POST', 'http://leed.at:3337/loginInfo');
+            xhr.open('POST', 'YOUR SERVER URL TO SEND POST(USER INFO)');
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
             xhr.onload = function () {
                 console.log('Signed in as: ' + xhr.responseText);
